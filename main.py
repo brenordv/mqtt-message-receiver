@@ -19,7 +19,7 @@ def _sanitize_folder_name(name: str) -> str:
     This regex removes all characters except letters, numbers, underscores, and hyphens.
     """
     LOGGER.debug(f"Sanitizing folder name: {name}")
-    return re.sub(r"[^a-zA-Z0-9_\-.]", "_", name)
+    return re.sub(r"[^a-zA-Z0-9_\-.]", "_", name).lower().strip()
 
 
 def _validate_message_schema(msg: dict) -> bool:
