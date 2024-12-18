@@ -70,9 +70,6 @@ def main() -> None:
     LOGGER.info(f"Connecting to MQTT broker: {MQTT_HOST}:{MQTT_PORT} [{MQTT_KEEPALIVE}s]")
     _mqtt_client.connect(MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE)
 
-    # LOGGER.info("Starting MQTT loop...")
-    # _MQTT_CLIENT.loop_forever()
-
     while True:
         for test_title, test_message in _test_messages.items():
             LOGGER.info(f"Test message: {test_title}")
