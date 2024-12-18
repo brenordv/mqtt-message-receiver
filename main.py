@@ -59,6 +59,7 @@ def process_message(msg_dict: dict):
 
     # Determine if it's valid and allowed
     is_valid = _validate_message_schema(msg_dict)
+    original_app_name = msg_dict["app_name"]
     app_name = msg_dict["app_name"] if is_valid else DEAD_LETTER_APP_NAME
 
     if app_name == DEAD_LETTER_APP_NAME:
@@ -84,7 +85,7 @@ def process_message(msg_dict: dict):
     # Format the content
     incident_date_str = now.strftime("%Y/%m/%d %H:%M:%S.%f")
     content = (
-        f"App Name: {app_name}\n"
+        f"App Name: {original_app_name}\n"
         f"Incident date: {incident_date_str}\n"
         f"------------------------------------------------------\n"
         f"Error:\n{error_message}\n"
