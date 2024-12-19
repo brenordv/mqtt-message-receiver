@@ -7,16 +7,33 @@ from typing import Union
 import paho.mqtt.client as mqtt
 from paho.mqtt.client import Client
 
-from config import LOGGER, MQTT_USERNAME, MQTT_PASSWORD, MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE, TOPIC
+from config import LOGGER, MQTT_USERNAME, MQTT_PASSWORD, MQTT_HOST, MQTT_PORT, MQTT_KEEPALIVE, TOPIC, ALLOWED_APP_NAMES
 
 # Interval in seconds between published messages
 PUBLISH_INTERVAL = 5  # Adjust as needed
 _mqtt_client: Union[Client, None] = None
 _test_messages = {
     "Valid message, allowed app name": {
-        "app_name": "web_app",
+        "app_name": ALLOWED_APP_NAMES[0],
         "error_message": "Encountered a critical error in module X",
         "stack_trace": "Exception: NullPointerException at line 42"
+    },
+    "Valid message with dict extras, allowed app name": {
+        "app_name": ALLOWED_APP_NAMES[0],
+        "error_message": "Encountered a critical error in module X",
+        "stack_trace": "Exception: NullPointerException at line 42",
+        "extras": {
+            "user_id": 12345,
+            "user_name": "John Doe",
+            "email": "why@sending.this",
+            "some_other": "info"
+        }
+    },
+    "Valid message with string extras, allowed app name": {
+        "app_name": ALLOWED_APP_NAMES[0],
+        "error_message": "Encountered a critical error in module X",
+        "stack_trace": "Exception: NullPointerException at line 42",
+        "extras": "Some simple extra info"
     },
     "[dead letter] Valid message but not allowed app name": {
         "app_name": "unlisted_app",

@@ -13,14 +13,21 @@ MQTT_PORT = int(os.getenv("MQTT_PORT", 1883))
 MQTT_USERNAME = os.getenv("MQTT_USERNAME")
 MQTT_PASSWORD = os.getenv("MQTT_PASSWORD")
 MQTT_KEEPALIVE = int(os.getenv("MQTT_KEEPALIVE", 60))
+
 ALLOW_ANONYMOUS = os.getenv("ALLOW_ANONYMOUS", False).lower().strip() == "true"
+
 TOPIC = os.getenv("TOPIC")
+
 DEAD_LETTER_APP_NAME = os.getenv("DEAD_LETTER_APP_NAME", ".dead-letter")
+
 APP_LOG_LEVEL = os.getenv("APP_LOG_LEVEL", "INFO")
 LOGGER: logging = log_factory("error-reporting", log_level=APP_LOG_LEVEL, unique_handler_types=True)
+
 ERROR_REPORTING_APP_NAME = os.getenv("ERROR_REPORTING_APP_NAME", "error-reporting-app")
+
 MAX_RETRIES_ON_EXCEPTION = int(os.getenv("MAX_RETRIES_ON_EXCEPTION", -1))
 RESTART_DELAY_ON_EXCEPTION = int(os.getenv("RESTART_DELAY_ON_EXCEPTION", 5))
+
 _error_report_folder = os.getenv("ERROR_REPORT_FOLDER")
 
 ALLOWED_APP_NAMES = list(set(
