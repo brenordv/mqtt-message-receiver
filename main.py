@@ -74,7 +74,12 @@ def _format_extra_data(extra_data: Union[dict, str]) -> str:
 
     key_width = max(len(str(key)) for key in serialized_data.keys())
     value_width = max(len(str(value)) for value in serialized_data.values())
-    formatted_table = "\n".join(f"{key:<{key_width}}  {value:<{value_width}}" for key, value in serialized_data.items())
+
+    table_parts = []
+    for key, value in serialized_data.items():
+        table_parts.append(f"{key:<{key_width}}  {str(value):<{value_width}}")
+
+    formatted_table = "\n".join(table_parts)
 
     LOGGER.info(f"Serialized {len(serialized_data)} extra data items.")
     return formatted_table
