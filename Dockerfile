@@ -1,5 +1,8 @@
 FROM python:3.13-slim
 
+# Set environment variable for timezone
+ENV TZ=America/Toronto
+
 WORKDIR /app
 
 COPY . .
